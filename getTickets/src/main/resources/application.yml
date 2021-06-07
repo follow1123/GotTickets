@@ -1,0 +1,55 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/got_tickets_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2b8
+    username: root
+    password: 112358
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 192.168.111.123
+    password: 112358
+  profiles:
+    active: string-messages
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    #字段如果为空 在更新时不更改相应字段值
+    global-config:
+      field-strategy: 1
+    #打印sql语句
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    新增数据时默认返回数据的id
+    use-generated-keys: true
+    interceptors:
+  #    扫描通用枚举
+#  global-config:
+#    meta-object-handler: com/yang/gotTickets/config/MyMetaObjHandler
+#  type-enums-package: com.yang.gotTickets.bean.fieldEnums
+
+
+logging:
+  level:
+    root: info
+    com.yang.gotTickets : debug
+project:
+  #需要过滤的资源
+  http-permit-args:
+    # 过滤swagger相关资源
+    - "/**/*.ico"
+    - "/**/*.icon"
+    - "/doc.html#/home"
+    - "/*.html"
+    - "/**/*.html"
+    - "/**/*.css"
+    - "/**/*.js"
+    - "/webSocket/**"
+    - "/swagger-ui.html"
+    - "/swagger-resources/**"
+    - "/images/**"
+    - "/webjars/**"
+    - "/v2/api-docs"
+    - "/configuration/ui"
+    - "/configuration/security"
